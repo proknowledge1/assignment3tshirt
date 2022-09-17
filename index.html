@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Making</title>
+    
+    <style>
+        *{
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin: 15px 250px;
+    font-size: 17px;
+    padding:8px 8px;
+}
+
+.container{
+    background-color: rgb(225, 236, 236);
+    padding:5px 20px 15px 20px;
+    border: 1px solid grey;
+    border-radius: 7px;
+}
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+select,textarea{
+    width:100%;
+    margin:10px;
+    padding:12px 20px;
+    border:1px solid lightgray;
+    border-radius: 4px;
+    align-items: center;
+}
+fieldset{
+    background-color: white;
+    border:1px solid lightgray;
+    border-radius: 4px;
+}
+.mainheading{
+    text-align:center;
+    font-family: Arial, Helvetica, sans-serif ;
+    font-size: 40px ;
+    color:rgb(110, 29, 29) ;
+}
+input[type="submit"]{
+    background-color: rgba(78, 143, 72, 0.904);
+    color:white;
+    text-align:center;
+    padding:12px 20px;
+    width:100%;
+    border:none;
+    border-radius: 4px;
+    cursor:grab;
+}
+input[type="submit"]:hover{
+    background-color: rgb(46, 85, 45);
+}
+</style>
+<script>
+function formValidation()
+{
+
+var uname = document.registration.username;
+var uadd = document.registration.address;
+var usize = document.registration.size;
+var uzip = document.registration.zip;
+var uemail = document.registration.email;
+var umsex = document.registration.msex;
+var ufsex = document.registration.fsex;
+
+
+if(allLetter(fullname))
+{
+if(alphanumeric(uadd))
+{ 
+if(sizeselect(usize))
+{
+if(allnumeric(uzip))
+{
+if(ValidateEmail(uemail))
+{
+if(validsex(umsex,ufsex))
+{
+}
+} 
+}
+} 
+}
+}
+}
+
+return false;
+
+function validsex(umsex,ufsex)
+{
+x=0;
+
+if(umsex.checked) 
+{
+x++;
+} if(ufsex.checked)
+{
+x++; 
+}
+if(x==0)
+{
+alert('Select Male/Female');
+umsex.focus();
+return false;
+}
+else
+{
+alert('Form Succesfully Submitted');
+window.location.reload()
+return true;
+}
+
+function userid_validation(uid,mx,my)
+{
+var uid_len = uid.value.length;
+if (uid_len == 0 || uid_len >= my || uid_len < mx)
+{
+alert("User Id should not be empty / length be between "+mx+" to "+my);
+uid.focus();
+return false;
+}
+return true;
+}
+function passid_validation(passid,mx,my)
+{
+var passid_len = passid.value.length;
+if (passid_len == 0 ||passid_len >= my || passid_len < mx)
+{
+alert("Password should not be empty / length be between "+mx+" to "+my);
+passid.focus();
+return false;
+}
+return true;
+}
+function allLetter(uname)
+{ 
+var letters = /^[A-Za-z]+$/;
+if(uname.value.match(letters))
+{
+return true;
+}
+else
+{
+alert('Username must have alphabet characters only');
+uname.focus();
+return false;
+}
+}
+function alphanumeric(uadd)
+{ 
+var letters = /^[0-9a-zA-Z]+$/;
+if(uadd.value.match(letters))
+{
+return true;
+}
+else
+{
+alert('User address must have alphanumeric characters only');
+uadd.focus();
+return false;
+}
+}
+function countryselect(ucountry)
+{
+if(ucountry.value == "Default")
+{
+alert('Select your country from the list');
+ucountry.focus();
+return false;
+}
+else
+{
+return true;
+}
+}
+function allnumeric(uzip)
+{ 
+var numbers = /^[0-9]+$/;
+if(uzip.value.match(numbers))
+{
+return true;
+}
+else
+{
+alert('ZIP code must have numeric characters only');
+uzip.focus();
+return false;
+}
+}
+function ValidateEmail(uemail)
+{ /*
+var x=uemail.value;  
+var atposition=x.indexOf("@");  
+var dotposition=x.lastIndexOf(".");  
+if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
+  alert("Please enter a valid e-mail address \n atpostion:"+atposition+"\n dotposition:"+dotposition);  
+  return false; 
+else 
+	return true;
+  }  
+}*/  
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+if(uemail.value.match(mailformat))
+{
+return true;
+}
+else
+{
+alert("You have entered an invalid email address!");
+uemail.focus();
+return false;
+}
+} function validsex(umsex,ufsex)
+{
+x=0;
+
+if(umsex.checked) 
+{
+x++;
+} if(ufsex.checked)
+{
+x++; 
+}
+if(x==0)
+{
+alert('Select Male/Female');
+umsex.focus();
+return false;
+}
+else
+{
+alert('Form Succesfully Submitted');
+window.location.reload()
+return true;
+}
+}
+    </script>
+</head>
+<body>
+    <form action="" name="registration" method="get" class="container" onsubmit="formValidate()">
+        <h1 class="mainheading">DESIGN YOUR T-SHIRT</h1>
+        <P>Mandatory feilds are marked with *</P>
+        <h2>CONTACT DETAILS</h2>
+        <br>
+        <p>Name: * <input type="text" name="fullname" id=fullname required placeholder="enter your name"></p>
+        <fieldset><legend>"Gender *"</legend><p>Male: <input type="radio" name="fsex"   required></p>
+        <p>Female:<input type="radio" name="fsex"  required></p></fieldset>
+        <p>Email: * <input type="email" name="email" id="email"  required placeholder="example@gmail.com"></p>
+        <p>Address: <textarea name="address" rows=5 cols=20 id="address" placeholder="enter your address"></textarea></p>
+        <p>Pincode: * <input type="number" name="zip" required placeholder="000000"></p>
+        <br>
+        <hr>
+
+        <h2>T-shirt Details </h2>
+        <p>Size : *
+            <select name="size" id="size"  required>
+                <option value="">--Select the T-shirt size--</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+                <option value="excel">Excel</option>
+            </select>
+        <p>quantity: * <input type="text" name="fullname" id=fullname required placeholder="quantity"></p>
+        <p>Tagline on the T-shirt: * <input type="text" name="fullname" id=fullname required placeholder="enter your tagline"></p>
+        <label for="favcolor">Select your favorite color:</label>
+        <input type="color" id="favcolor" name="favcolor" value="#ff0000">
+
+
+
+
+        <h2>Payment Details</h2>
+        <p>Type of card : *
+            <select name="cardtype" id="cardtype"  required>
+                <option value="">--Select a card type--</option>
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+            </select>
+        </p>
+        <p>Card Number *: <input type="number" name="cardnumber" id="cardnumber" required placeholder="1111-2222-3333-4444"> </p>
+        <p>CVV: *<input type="number" name="cvv" id="cvv" required ></p>
+        <p>Expiry date: *<input type="date" name="expdate" id="expdate" required></p>
+        <input type="submit" value="PAY NOW" name="submit">
+
+    </form>
+</body>
+</html>
